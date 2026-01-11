@@ -19,8 +19,8 @@ class HelpScreen(BaseScreen):
         tips = (
             "Navigarea se face folosind butoanele din fiecare ecran.\n"
             "Lista de cursuri poate fi completata cu date noi.\n"
+            "Intrebarile din test se pot modifica din \"Gestionare Quiz\" \n"
             "Rezultatul testului grila este afisat la final.\n"
-            "Pentru orice intrebare, contacteaza responsabilul de laborator."
         )
         tk.Label(self, text=tips, bg=THEME["help_bg"], justify="left").pack(pady=10)
 
