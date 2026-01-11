@@ -18,9 +18,9 @@ class App(tk.Tk):
         super().__init__()
         self.configure(bg="#ffffff")
         self.title(APP_TITLE)
-        self.geometry("900x650")
-        self.minsize(800, 600)
-        self.resizable(True, True)
+        self.geometry("400x300")
+        self.minsize(400, 300)
+        self.resizable(False, False)
 
         self.courses = load_courses()
         self.quiz_questions = load_quiz_questions()
