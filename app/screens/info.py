@@ -20,7 +20,7 @@ class InfoScreen(BaseScreen):
             "Aplicatie pentru managementul cursurilor si testare rapida.\n"
             "Include module: autentificare, meniu, gestionare cursuri,\n"
             "test grila si sectiune de help.\n\n"
-            "Datele initiale sunt preincarcate (dummy) pentru demonstratie."
+            "Informatiile sunt incarcate si salvate local pentru continuitate."
         )
         tk.Label(self, text=content, bg=THEME["info_bg"], justify="center").pack(pady=10)
 

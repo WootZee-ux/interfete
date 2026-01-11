@@ -2,7 +2,7 @@
 import tkinter as tk
 
 from app.constants import APP_TITLE
-from app.data import DUMMY_COURSES, QUIZ_QUESTIONS
+from app.data import load_courses, load_quiz_questions
 from app.screens.login import LoginScreen
 from app.screens.main_menu import MainMenuScreen
 from app.screens.data_management import DataManagementScreen
@@ -18,15 +18,18 @@ class App(tk.Tk):
         super().__init__()
         self.configure(bg="#ffffff")
         self.title(APP_TITLE)
-        self.geometry("560x460")
-        self.resizable(False, False)
+        self.geometry("900x650")
+        self.minsize(800, 600)
+        self.resizable(True, True)
 
-        self.courses = [course.copy() for course in DUMMY_COURSES]
-        self.quiz_questions = [question.copy() for question in QUIZ_QUESTIONS]
+        self.courses = load_courses()
+        self.quiz_questions = load_quiz_questions()
 
         self.screens = {}
         container = tk.Frame(self, bg="#ffffff")
         container.pack(fill="both", expand=True)
+        container.rowconfigure(0, weight=1)
+        container.columnconfigure(0, weight=1)
 
         self._init_screens(container)
         self.show_screen("login")
