@@ -38,7 +38,7 @@ class LoginScreen(BaseScreen):
 
         info = tk.Label(
             self,
-            text="Foloseste date demo pentru a intra: student / demo",
+            text="Introdu datele tale pentru acces.",
             bg=THEME["login_bg"],
             fg="#555",
         )

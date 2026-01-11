@@ -3,6 +3,7 @@ from tkinter import messagebox
 import tkinter as tk
 
 from app.constants import THEME
+from app.data import save_courses
 from app.screens.base import BaseScreen
 
 
@@ -63,6 +64,7 @@ class DataManagementScreen(BaseScreen):
             messagebox.showwarning("Date incomplete", "Completeaza numele cursului si profesorul.")
             return
         self.app.courses.append({"course": course, "teacher": teacher})
+        save_courses(self.app.courses)
         self.course_entry.delete(0, tk.END)
         self.teacher_entry.delete(0, tk.END)
         self._refresh_list()
@@ -74,4 +76,5 @@ class DataManagementScreen(BaseScreen):
             return
         index = selection[0]
         del self.app.courses[index]
+        save_courses(self.app.courses)
         self._refresh_list()

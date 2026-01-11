@@ -31,7 +31,7 @@ class QuizScreen(BaseScreen):
         self.question_label.pack(pady=10)
 
         self.options_frame = tk.Frame(self, bg=THEME["quiz_bg"])
-        self.options_frame.pack(pady=5, anchor="w")
+        self.options_frame.pack(pady=5, anchor="w", fill="x")
 
         self.feedback_label = tk.Label(self, text="", bg=THEME["quiz_bg"], fg="#4a148c")
         self.feedback_label.pack(pady=5)
@@ -54,7 +54,7 @@ class QuizScreen(BaseScreen):
 
     def _load_question(self):
         question = self.app.quiz_questions[self.current_question]
-        self.answer_var.set("")
+        self.answer_var = tk.StringVar(value="")
         self.question_label.config(text=f"{self.current_question + 1}. {question['question']}")
         for widget in self.options_frame.winfo_children():
             widget.destroy()
@@ -65,7 +65,9 @@ class QuizScreen(BaseScreen):
                 value=option,
                 variable=self.answer_var,
                 bg=THEME["quiz_bg"],
-            ).pack(anchor="w", padx=20)
+                selectcolor="white",
+                anchor="w",
+            ).pack(anchor="w", padx=20, fill="x")
         self.feedback_label.config(text="")
 
     def _submit(self):
