@@ -7,7 +7,7 @@ from app.screens.login import LoginScreen
 from app.screens.main_menu import MainMenuScreen
 from app.screens.data_management import DataManagementScreen
 from app.screens.quiz import QuizScreen
-from app.screens.info import InfoScreen
+from app.screens.quiz_management import QuizManagementScreen
 from app.screens.help import HelpScreen
 
 
@@ -40,7 +40,7 @@ class App(tk.Tk):
             "main_menu": MainMenuScreen(container, self),
             "data": DataManagementScreen(container, self),
             "quiz": QuizScreen(container, self),
-            "info": InfoScreen(container, self),
+            "quiz_management": QuizManagementScreen(container, self),
             "help": HelpScreen(container, self),
         }
         for screen in self.screens.values():

@@ -45,6 +45,11 @@ def load_quiz_questions() -> list[dict[str, Any]]:
     return _load_json(QUIZ_PATH, DEFAULT_QUIZ_QUESTIONS)
 
 
+def save_quiz_questions(questions: list[dict[str, Any]]) -> None:
+    """Salveaza intrebarile pentru testul grila in fisier."""
+    _save_json(QUIZ_PATH, questions)
+
+
 def _load_json(path: Path, fallback: list[dict[str, Any]]) -> list[dict[str, Any]]:
     STORAGE_DIR.mkdir(parents=True, exist_ok=True)
     if not path.exists():

@@ -54,7 +54,7 @@ class QuizScreen(BaseScreen):
 
     def _load_question(self):
         question = self.app.quiz_questions[self.current_question]
-        self.answer_var = tk.StringVar(value="")
+        self.answer_var = tk.StringVar(value="__fara_selectie__")
         self.question_label.config(text=f"{self.current_question + 1}. {question['question']}")
         for widget in self.options_frame.winfo_children():
             widget.destroy()

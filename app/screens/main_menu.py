@@ -30,7 +30,7 @@ class MainMenuScreen(BaseScreen):
         buttons = [
             ("Gestionare Cursuri", lambda: self.app.show_screen("data")),
             ("Test Grila", lambda: self.app.show_screen("quiz")),
-            ("Informatii", lambda: self.app.show_screen("info")),
+            ("Gestionare Quiz", lambda: self.app.show_screen("quiz_management")),
             ("Help", lambda: self.app.show_screen("help")),
         ]
         for idx, (label, cmd) in enumerate(buttons):
