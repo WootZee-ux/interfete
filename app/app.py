@@ -18,8 +18,8 @@ class App(tk.Tk):
         super().__init__()
         self.configure(bg="#ffffff")
         self.title(APP_TITLE)
-        self.geometry("400x300")
-        self.minsize(400, 300)
+        self.geometry("450x400")
+        self.minsize(450, 400)
         self.resizable(False, False)
 
         self.courses = load_courses()
