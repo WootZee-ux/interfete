@@ -53,15 +53,18 @@ def salveaza_chestionar(intrebari: list[dict[str, Any]]) -> None:
 def _incarca_json(cale: Path, fallback: list[dict[str, Any]]) -> list[dict[str, Any]]:
     DIRECTOR_STOCARE.mkdir(parents=True, exist_ok=True)
     if not cale.exists():
+        # Initializam fisierul cu date implicite daca lipseste.
         _salveaza_json(cale, fallback)
         return [item.copy() for item in fallback]
     try:
         with cale.open("r", encoding="utf-8") as handle:
             date = json.load(handle)
     except json.JSONDecodeError:
+        # Refacem fisierul daca JSON-ul este corupt.
         _salveaza_json(cale, fallback)
         return [item.copy() for item in fallback]
     if not isinstance(date, list):
+        # Pastram structura asteptata pentru ecranele aplicatiei.
         _salveaza_json(cale, fallback)
         return [item.copy() for item in fallback]
     return date
@@ -69,5 +72,6 @@ def _incarca_json(cale: Path, fallback: list[dict[str, Any]]) -> list[dict[str, 
 
 def _salveaza_json(cale: Path, date: list[dict[str, Any]]) -> None:
     DIRECTOR_STOCARE.mkdir(parents=True, exist_ok=True)
+    # Salvam consistent datele pentru a fi reutilizate la urmatoarea pornire.
     with cale.open("w", encoding="utf-8") as handle:
         json.dump(date, handle, ensure_ascii=False, indent=2)

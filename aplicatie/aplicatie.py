@@ -25,6 +25,7 @@ class Aplicatie(tk.Tk):
         self.cursuri = incarca_cursuri()
         self.intrebari_chestionar = incarca_chestionar()
 
+        # Container comun in care sunt plasate toate ecranele.
         self.ecrane = {}
         container = tk.Frame(self, bg=TEMA["fundal_aplicatie"])
         container.pack(fill="both", expand=True)
@@ -35,6 +36,7 @@ class Aplicatie(tk.Tk):
         self.afiseaza_ecran("autentificare")
 
     def _init_ecrane(self, container):
+        # Initializam ecranele o singura data pentru a pastra starea locala.
         self.ecrane = {
             "autentificare": EcranAutentificare(container, self),
             "meniu_principal": EcranMeniuPrincipal(container, self),
