@@ -1,0 +1,14 @@
+[
+  {
+    "curs": "Programare Python",
+    "profesor": "Conf. Popescu"
+  },
+  {
+    "curs": "Baze de date",
+    "profesor": "Lect. Ionescu"
+  },
+  {
+    "curs": "Retele de calculatoare",
+    "profesor": "Prof. Georgescu"
+  }
+]

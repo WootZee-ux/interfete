@@ -1,0 +1,20 @@
+[
+  {
+    "intrebare": "Care este biblioteca grafica folosita in aceasta aplicatie?",
+    "optiuni": [
+      "Tkinter",
+      "PyQt",
+      "Kivy"
+    ],
+    "raspuns": "Tkinter"
+  },
+  {
+    "intrebare": "Ce widget folosim pentru selectia unei singure optiuni?",
+    "optiuni": [
+      "Listbox",
+      "Radiobutton",
+      "Canvas"
+    ],
+    "raspuns": "Radiobutton"
+  }
+]
