@@ -1,20 +1,20 @@
 [
   {
-    "intrebare": "Care este biblioteca grafica folosita in aceasta aplicatie?",
+    "intrebare": "Ce tip de fisier folosim pentru persistenta datelor cursurilor?",
     "optiuni": [
-      "Tkinter",
-      "PyQt",
-      "Kivy"
+      "JSON",
+      "CSV",
+      "XML"
     ],
-    "raspuns": "Tkinter"
+    "raspuns": "JSON"
   },
   {
-    "intrebare": "Ce widget folosim pentru selectia unei singure optiuni?",
+    "intrebare": "Care este widgetul folosit pentru afisarea unei liste selectabile?",
     "optiuni": [
       "Listbox",
-      "Radiobutton",
-      "Canvas"
+      "Label",
+      "Entry"
     ],
-    "raspuns": "Radiobutton"
+    "raspuns": "Listbox"
   }
 ]
