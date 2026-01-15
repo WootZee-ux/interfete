@@ -15,47 +15,121 @@ class QuizManagementScreen(BaseScreen):
         self._build_ui()
 
     def _build_ui(self):
-        title = tk.Label(self, text="Gestionare Quiz", font=("Helvetica", 18, "bold"), bg=THEME["info_bg"])
-        title.pack(pady=15)
+        self.build_header("Gestionare Quiz", "Configureaza intrebarile si optiunile", icon="🧩")
+        content = self.build_card()
+        content.columnconfigure(1, weight=1)
 
-        form = tk.Frame(self, bg=THEME["info_bg"])
-        form.pack(pady=5)
+        tk.Label(
+            content,
+            text="Intrebare noua",
+            font=("Segoe UI", 12, "bold"),
+            bg=THEME["card_bg"],
+            fg=THEME["text_dark"],
+        ).grid(row=0, column=0, columnspan=2, sticky="w")
 
-        tk.Label(form, text="Intrebare:", bg=THEME["info_bg"]).grid(row=0, column=0, sticky="e", padx=5, pady=5)
-        tk.Label(form, text="Optiuni (cu virgula):", bg=THEME["info_bg"]).grid(
-            row=1, column=0, sticky="e", padx=5, pady=5
+        form = tk.Frame(content, bg=THEME["card_bg"])
+        form.grid(row=1, column=0, columnspan=2, sticky="ew", pady=(6, 12))
+        form.columnconfigure(1, weight=1)
+
+        tk.Label(form, text="Intrebare", bg=THEME["card_bg"], fg=THEME["text_muted"]).grid(
+            row=0, column=0, sticky="w"
         )
-        tk.Label(form, text="Raspuns corect:", bg=THEME["info_bg"]).grid(
-            row=2, column=0, sticky="e", padx=5, pady=5
+        tk.Label(form, text="Optiuni (cu virgula)", bg=THEME["card_bg"], fg=THEME["text_muted"]).grid(
+            row=1, column=0, sticky="w", pady=(8, 0)
+        )
+        tk.Label(form, text="Raspuns corect", bg=THEME["card_bg"], fg=THEME["text_muted"]).grid(
+            row=2, column=0, sticky="w", pady=(8, 0)
         )
 
-        self.question_entry = tk.Entry(form, width=40)
-        self.options_entry = tk.Entry(form, width=40)
-        self.answer_entry = tk.Entry(form, width=40)
+        self.question_entry = tk.Entry(
+            form,
+            bg=THEME["entry_bg"],
+            fg=THEME["entry_fg"],
+            relief="flat",
+            highlightthickness=1,
+            highlightbackground=THEME["card_border"],
+        )
+        self.options_entry = tk.Entry(
+            form,
+            bg=THEME["entry_bg"],
+            fg=THEME["entry_fg"],
+            relief="flat",
+            highlightthickness=1,
+            highlightbackground=THEME["card_border"],
+        )
+        self.answer_entry = tk.Entry(
+            form,
+            bg=THEME["entry_bg"],
+            fg=THEME["entry_fg"],
+            relief="flat",
+            highlightthickness=1,
+            highlightbackground=THEME["card_border"],
+        )
 
-        self.question_entry.grid(row=0, column=1, padx=5, pady=5)
-        self.options_entry.grid(row=1, column=1, padx=5, pady=5)
-        self.answer_entry.grid(row=2, column=1, padx=5, pady=5)
+        self.question_entry.grid(row=0, column=1, sticky="ew", padx=(12, 0))
+        self.options_entry.grid(row=1, column=1, sticky="ew", padx=(12, 0), pady=(8, 0))
+        self.answer_entry.grid(row=2, column=1, sticky="ew", padx=(12, 0), pady=(8, 0))
 
-        add_btn = tk.Button(form, text="Adauga", command=self._add_question, bg="#43a047", fg="white")
-        add_btn.grid(row=0, column=2, rowspan=3, padx=10)
+        add_btn = tk.Button(
+            form,
+            text="Adauga intrebare",
+            command=self._add_question,
+            bg=THEME["accent_success"],
+            fg=THEME["text_light"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        )
+        add_btn.grid(row=0, column=2, rowspan=3, padx=(12, 0))
 
-        list_frame = tk.Frame(self, bg=THEME["info_bg"])
-        list_frame.pack(pady=10)
+        tk.Label(
+            content,
+            text="Intrebari existente",
+            font=("Segoe UI", 12, "bold"),
+            bg=THEME["card_bg"],
+            fg=THEME["text_dark"],
+        ).grid(row=2, column=0, columnspan=2, sticky="w")
 
-        self.question_list = tk.Listbox(list_frame, width=48, height=6)
-        self.question_list.pack(side="left", padx=(0, 5))
+        list_frame = tk.Frame(content, bg=THEME["card_bg"])
+        list_frame.grid(row=3, column=0, columnspan=2, sticky="nsew", pady=(6, 0))
+
+        self.question_list = tk.Listbox(
+            list_frame,
+            width=48,
+            height=6,
+            bg=THEME["list_bg"],
+            fg=THEME["list_fg"],
+            highlightthickness=1,
+            highlightbackground=THEME["card_border"],
+        )
+        self.question_list.pack(side="left", fill="both", expand=True, padx=(0, 6))
 
         scrollbar = tk.Scrollbar(list_frame, command=self.question_list.yview)
         scrollbar.pack(side="left", fill="y")
         self.question_list.config(yscrollcommand=scrollbar.set)
 
-        btns = tk.Frame(self, bg=THEME["info_bg"])
-        btns.pack(pady=5)
-        tk.Button(btns, text="Sterge selectia", command=self._remove_question).pack(side="left", padx=5)
-        tk.Button(btns, text="Inapoi la meniu", command=lambda: self.app.show_screen("main_menu")).pack(
-            side="left", padx=5
-        )
+        btns = tk.Frame(content, bg=THEME["card_bg"])
+        btns.grid(row=4, column=0, columnspan=2, sticky="ew", pady=(12, 0))
+        tk.Button(
+            btns,
+            text="Sterge selectia",
+            command=self._remove_question,
+            bg=THEME["accent_rose"],
+            fg=THEME["text_light"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        ).pack(side="left")
+        tk.Button(
+            btns,
+            text="Inapoi la meniu",
+            command=lambda: self.app.show_screen("main_menu"),
+            bg=THEME["text_dark"],
+            fg=THEME["text_light"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        ).pack(side="right")
 
     def on_show(self):
         self._refresh_list()

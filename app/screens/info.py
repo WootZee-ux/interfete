@@ -13,15 +13,39 @@ class InfoScreen(BaseScreen):
         self._build_ui()
 
     def _build_ui(self):
-        title = tk.Label(self, text="Informatii", font=("Helvetica", 18, "bold"), bg=THEME["info_bg"])
-        title.pack(pady=15)
+        self.build_header("Informatii", "Prezentare generala a aplicatiei", icon="ℹ️")
+        content = self.build_card()
 
-        content = (
-            "Aplicatie pentru managementul cursurilor si testare rapida.\n"
-            "Include module: autentificare, meniu, gestionare cursuri,\n"
-            "test grila si sectiune de help.\n\n"
-            "Informatiile sunt incarcate si salvate local pentru continuitate."
+        tk.Label(
+            content,
+            text="Aplicatie pentru managementul cursurilor si testare rapida.",
+            font=("Segoe UI", 12, "bold"),
+            bg=THEME["card_bg"],
+            fg=THEME["text_dark"],
+            wraplength=420,
+            justify="left",
+        ).pack(anchor="w", pady=(0, 10))
+
+        details = (
+            "Include module: autentificare, meniu, gestionare cursuri, test grila si sectiune de help.\n\n"
+            "Informatiile sunt incarcate si salvate local pentru continuitate si acces rapid."
         )
-        tk.Label(self, text=content, bg=THEME["info_bg"], justify="center").pack(pady=10)
+        tk.Label(
+            content,
+            text=details,
+            bg=THEME["card_bg"],
+            fg=THEME["text_muted"],
+            justify="left",
+            wraplength=420,
+        ).pack(anchor="w")
 
-        tk.Button(self, text="Inapoi la meniu", command=lambda: self.app.show_screen("main_menu")).pack(pady=10)
+        tk.Button(
+            content,
+            text="Inapoi la meniu",
+            command=lambda: self.app.show_screen("main_menu"),
+            bg=THEME["text_dark"],
+            fg=THEME["text_light"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        ).pack(anchor="e", pady=(16, 0))
