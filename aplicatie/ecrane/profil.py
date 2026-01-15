@@ -32,8 +32,6 @@ class EcranProfil(EcranBaza):
             ("Specializare", "Informatica"),
             ("Email", "daniel.uta@s.utm.ro"),
             ("An", "III"),
-            ("Forma de invatamant", "Buget"),
-            ("Camin", "Gaudeamus"),
         ]
         for eticheta, valoare in campuri:
             linie = tk.Frame(detalii, bg=TEMA["fundal_card"])
@@ -80,8 +78,19 @@ class EcranProfil(EcranBaza):
             selectcolor=TEMA["fundal_card"],
         ).pack(anchor="w")
 
+        actiuni = tk.Frame(continut, bg=TEMA["fundal_card"])
+        actiuni.pack(fill="x", pady=(16, 0))
         tk.Button(
-            continut,
+            actiuni,
+            text="Editeaza profil",
+            bg=TEMA["accent_secundar"],
+            fg=TEMA["text_deschis"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        ).pack(side="left")
+        tk.Button(
+            actiuni,
             text="Inapoi la meniu",
             command=lambda: self.aplicatie.afiseaza_ecran("meniu_principal"),
             bg=TEMA["text_inchis"],
@@ -89,4 +98,4 @@ class EcranProfil(EcranBaza):
             relief="flat",
             padx=12,
             pady=6,
-        ).pack(anchor="e", pady=(16, 0))
+        ).pack(side="right")
