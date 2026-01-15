@@ -1,7 +1,7 @@
 """Aplicatia principala Tkinter."""
 import tkinter as tk
 
-from app.constants import APP_TITLE
+from app.constants import APP_TITLE, THEME
 from app.data import load_courses, load_quiz_questions
 from app.screens.login import LoginScreen
 from app.screens.main_menu import MainMenuScreen
@@ -16,17 +16,17 @@ class App(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        self.configure(bg="#ffffff")
+        self.configure(bg=THEME["app_bg"])
         self.title(APP_TITLE)
-        self.geometry("450x400")
-        self.minsize(450, 400)
+        self.geometry("520x460")
+        self.minsize(520, 460)
         self.resizable(False, False)
 
         self.courses = load_courses()
         self.quiz_questions = load_quiz_questions()
 
         self.screens = {}
-        container = tk.Frame(self, bg="#ffffff")
+        container = tk.Frame(self, bg=THEME["app_bg"])
         container.pack(fill="both", expand=True)
         container.rowconfigure(0, weight=1)
         container.columnconfigure(0, weight=1)

@@ -15,44 +15,99 @@ class LoginScreen(BaseScreen):
         self._build_ui()
 
     def _build_ui(self):
-        title = tk.Label(
-            self,
-            text="Autentificare",
-            font=("Helvetica", 18, "bold"),
-            bg=THEME["login_bg"],
+        self.build_header("Autentificare", "Acces rapid la portalul cursurilor", icon="🔐")
+        content = self.build_card()
+        content.columnconfigure(0, weight=1)
+        content.columnconfigure(1, weight=1)
+
+        info_panel = tk.Frame(content, bg=THEME["card_bg"])
+        info_panel.grid(row=0, column=0, sticky="nsew", padx=(0, 16))
+        tk.Label(
+            info_panel,
+            text="Bine ai venit!",
+            font=("Segoe UI", 16, "bold"),
+            bg=THEME["card_bg"],
+            fg=THEME["text_dark"],
+        ).pack(anchor="w", pady=(0, 6))
+        tk.Label(
+            info_panel,
+            text="Autentifica-te pentru a gestiona cursurile, testele si resursele academice.",
+            bg=THEME["card_bg"],
+            fg=THEME["text_muted"],
+            wraplength=190,
+            justify="left",
+        ).pack(anchor="w")
+        tk.Label(
+            info_panel,
+            text="• Salvare locala\n• Quiz-uri rapide\n• Navigare intuitiva",
+            bg=THEME["card_bg"],
+            fg=THEME["text_dark"],
+            justify="left",
+            pady=12,
+        ).pack(anchor="w")
+
+        form = tk.Frame(content, bg=THEME["card_bg"])
+        form.grid(row=0, column=1, sticky="nsew")
+
+        tk.Label(
+            form,
+            text="Utilizator",
+            bg=THEME["card_bg"],
+            fg=THEME["text_muted"],
+            font=("Segoe UI", 9, "bold"),
+        ).grid(row=0, column=0, sticky="w")
+        self.username_entry = tk.Entry(
+            form,
+            bg=THEME["entry_bg"],
+            fg=THEME["entry_fg"],
+            relief="flat",
+            highlightthickness=1,
+            highlightbackground=THEME["card_border"],
         )
-        title.pack(pady=20)
+        self.username_entry.grid(row=1, column=0, sticky="ew", pady=(4, 12))
 
-        form = tk.Frame(self, bg=THEME["login_bg"])
-        form.pack(pady=10)
+        tk.Label(
+            form,
+            text="Parola",
+            bg=THEME["card_bg"],
+            fg=THEME["text_muted"],
+            font=("Segoe UI", 9, "bold"),
+        ).grid(row=2, column=0, sticky="w")
+        self.password_entry = tk.Entry(
+            form,
+            show="*",
+            bg=THEME["entry_bg"],
+            fg=THEME["entry_fg"],
+            relief="flat",
+            highlightthickness=1,
+            highlightbackground=THEME["card_border"],
+        )
+        self.password_entry.grid(row=3, column=0, sticky="ew", pady=(4, 16))
 
-        tk.Label(form, text="Utilizator:", bg=THEME["login_bg"]).grid(row=0, column=0, sticky="e", padx=5, pady=5)
-        tk.Label(form, text="Parola:", bg=THEME["login_bg"]).grid(row=1, column=0, sticky="e", padx=5, pady=5)
-
-        self.username_entry = tk.Entry(form)
-        self.password_entry = tk.Entry(form, show="*")
-        self.username_entry.grid(row=0, column=1, padx=5, pady=5)
-        self.password_entry.grid(row=1, column=1, padx=5, pady=5)
-
-        login_btn = tk.Button(self, text="Autentificare", command=self._handle_login, bg="#4caf50", fg="white")
-        login_btn.pack(pady=10)
+        form.columnconfigure(0, weight=1)
+        login_btn = tk.Button(
+            form,
+            text="Intra in cont",
+            command=self._handle_login,
+            bg=THEME["accent_primary"],
+            fg=THEME["text_dark"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        )
+        login_btn.grid(row=4, column=0, sticky="ew")
 
         change_password_btn = tk.Button(
-            self,
-            text="Setare parola",
+            form,
+            text="Schimba parola",
             command=self._handle_set_password,
-            bg="#2196f3",
-            fg="white",
+            bg=THEME["accent_secondary"],
+            fg=THEME["text_light"],
+            relief="flat",
+            padx=12,
+            pady=6,
         )
-        change_password_btn.pack(pady=5)
-
-        info = tk.Label(
-            self,
-            text="Introdu datele tale pentru acces.",
-            bg=THEME["login_bg"],
-            fg="#555",
-        )
-        info.pack(pady=5)
+        change_password_btn.grid(row=5, column=0, sticky="ew", pady=(10, 0))
 
     def _handle_login(self):
         username = self.username_entry.get().strip()

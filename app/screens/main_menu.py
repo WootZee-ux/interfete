@@ -13,29 +13,59 @@ class MainMenuScreen(BaseScreen):
         self._build_ui()
 
     def _build_ui(self):
-        title = tk.Label(self, text="Meniu Principal", font=("Helvetica", 18, "bold"), bg=THEME["menu_bg"])
-        title.pack(pady=20)
+        self.build_header("Meniu Principal", "Alege un modul pentru a continua", icon="🧭")
+        content = self.build_card()
 
-        subtitle = tk.Label(
-            self,
-            text="Selecteaza un modul:",
-            font=("Helvetica", 12),
-            bg=THEME["menu_bg"],
+        title = tk.Label(
+            content,
+            text="Panou de comanda",
+            font=("Segoe UI", 14, "bold"),
+            bg=THEME["card_bg"],
+            fg=THEME["text_dark"],
         )
-        subtitle.pack(pady=5)
+        title.pack(anchor="w")
 
-        btn_frame = tk.Frame(self, bg=THEME["menu_bg"])
-        btn_frame.pack(pady=10)
+        grid = tk.Frame(content, bg=THEME["card_bg"])
+        grid.pack(fill="both", expand=True, pady=12)
+        for column in range(2):
+            grid.columnconfigure(column, weight=1)
 
         buttons = [
-            ("Gestionare Cursuri", lambda: self.app.show_screen("data")),
-            ("Test Grila", lambda: self.app.show_screen("quiz")),
-            ("Gestionare Quiz", lambda: self.app.show_screen("quiz_management")),
-            ("Help", lambda: self.app.show_screen("help")),
+            ("📚 Gestionare Cursuri", THEME["accent_primary"], lambda: self.app.show_screen("data")),
+            ("📝 Test Grila", THEME["accent_purple"], lambda: self.app.show_screen("quiz")),
+            ("🧩 Gestionare Quiz", THEME["accent_secondary"], lambda: self.app.show_screen("quiz_management")),
+            ("🆘 Help & Ghid", THEME["accent_rose"], lambda: self.app.show_screen("help")),
         ]
-        for idx, (label, cmd) in enumerate(buttons):
-            btn = tk.Button(btn_frame, text=label, width=22, command=cmd, bg="#2196f3", fg="white")
-            btn.grid(row=idx, column=0, pady=6)
+        for idx, (label, color, cmd) in enumerate(buttons):
+            row, col = divmod(idx, 2)
+            btn = tk.Button(
+                grid,
+                text=label,
+                command=cmd,
+                bg=color,
+                fg=THEME["text_light"],
+                relief="flat",
+                padx=12,
+                pady=12,
+            )
+            btn.grid(row=row, column=col, padx=6, pady=6, sticky="ew")
 
-        logout = tk.Button(self, text="Deconectare", command=lambda: self.app.show_screen("login"))
-        logout.pack(pady=10)
+        footer = tk.Frame(content, bg=THEME["card_bg"])
+        footer.pack(fill="x", pady=(12, 0))
+        tk.Label(
+            footer,
+            text="Status: conectat",
+            bg=THEME["card_bg"],
+            fg=THEME["text_muted"],
+        ).pack(side="left")
+        logout = tk.Button(
+            footer,
+            text="Deconectare",
+            command=lambda: self.app.show_screen("login"),
+            bg=THEME["text_dark"],
+            fg=THEME["text_light"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        )
+        logout.pack(side="right")

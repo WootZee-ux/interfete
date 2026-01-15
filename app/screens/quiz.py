@@ -17,35 +17,71 @@ class QuizScreen(BaseScreen):
         self._build_ui()
 
     def _build_ui(self):
-        title = tk.Label(self, text="Test Grila", font=("Helvetica", 18, "bold"), bg=THEME["quiz_bg"])
-        title.pack(pady=15)
+        self.build_header("Test Grila", "Raspunde corect pentru scor maxim", icon="📝")
+        content = self.build_card()
+
+        self.progress_label = tk.Label(
+            content,
+            text="",
+            bg=THEME["card_bg"],
+            fg=THEME["text_muted"],
+        )
+        self.progress_label.pack(anchor="w")
 
         self.question_label = tk.Label(
-            self,
+            content,
             text="",
-            bg=THEME["quiz_bg"],
-            font=("Helvetica", 12),
+            bg=THEME["card_bg"],
+            fg=THEME["text_dark"],
+            font=("Segoe UI", 12, "bold"),
             wraplength=420,
             justify="left",
         )
-        self.question_label.pack(pady=10)
+        self.question_label.pack(pady=(8, 12), anchor="w")
 
-        self.options_frame = tk.Frame(self, bg=THEME["quiz_bg"])
+        self.options_frame = tk.Frame(content, bg=THEME["card_bg"])
         self.options_frame.pack(pady=5, anchor="w", fill="x")
 
-        self.feedback_label = tk.Label(self, text="", bg=THEME["quiz_bg"], fg="#4a148c")
-        self.feedback_label.pack(pady=5)
+        self.feedback_label = tk.Label(content, text="", bg=THEME["card_bg"], fg=THEME["accent_purple"])
+        self.feedback_label.pack(pady=(0, 6))
 
-        btn_frame = tk.Frame(self, bg=THEME["quiz_bg"])
-        btn_frame.pack(pady=10)
+        btn_frame = tk.Frame(content, bg=THEME["card_bg"])
+        btn_frame.pack(pady=10, fill="x")
 
-        self.submit_btn = tk.Button(btn_frame, text="Trimite raspuns", command=self._submit, bg="#9c27b0", fg="white")
-        self.submit_btn.pack(side="left", padx=5)
+        self.submit_btn = tk.Button(
+            btn_frame,
+            text="Trimite raspuns",
+            command=self._submit,
+            bg=THEME["accent_primary"],
+            fg=THEME["text_dark"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        )
+        self.submit_btn.pack(side="left")
 
-        self.next_btn = tk.Button(btn_frame, text="Urmatoarea intrebare", command=self._next_question)
-        self.next_btn.pack(side="left", padx=5)
+        self.next_btn = tk.Button(
+            btn_frame,
+            text="Urmatoarea intrebare",
+            command=self._next_question,
+            bg=THEME["accent_secondary"],
+            fg=THEME["text_light"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        )
+        self.next_btn.pack(side="left", padx=8)
 
-        tk.Button(self, text="Inapoi la meniu", command=lambda: self.app.show_screen("main_menu")).pack(pady=5)
+        tk.Button(
+            btn_frame,
+            text="Inapoi la meniu",
+            command=lambda: self.app.show_screen("main_menu"),
+            bg=THEME["text_dark"],
+            fg=THEME["text_light"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        ).pack(side="right")
 
     def on_show(self):
         self.current_question = 0
@@ -55,7 +91,10 @@ class QuizScreen(BaseScreen):
     def _load_question(self):
         question = self.app.quiz_questions[self.current_question]
         self.answer_var = tk.StringVar(value="__fara_selectie__")
-        self.question_label.config(text=f"{self.current_question + 1}. {question['question']}")
+        self.progress_label.config(
+            text=f"Intrebarea {self.current_question + 1} din {len(self.app.quiz_questions)}"
+        )
+        self.question_label.config(text=question["question"])
         for widget in self.options_frame.winfo_children():
             widget.destroy()
         for option in question["options"]:
@@ -64,8 +103,9 @@ class QuizScreen(BaseScreen):
                 text=option,
                 value=option,
                 variable=self.answer_var,
-                bg=THEME["quiz_bg"],
-                selectcolor="white",
+                bg=THEME["card_bg"],
+                fg=THEME["text_dark"],
+                selectcolor=THEME["accent_primary"],
                 anchor="w",
             ).pack(anchor="w", padx=20, fill="x")
         self.feedback_label.config(text="")

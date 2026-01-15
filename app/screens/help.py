@@ -13,15 +13,38 @@ class HelpScreen(BaseScreen):
         self._build_ui()
 
     def _build_ui(self):
-        title = tk.Label(self, text="Help", font=("Helvetica", 18, "bold"), bg=THEME["help_bg"])
-        title.pack(pady=15)
+        self.build_header("Help", "Sfaturi rapide pentru utilizare", icon="🆘")
+        content = self.build_card()
+
+        tk.Label(
+            content,
+            text="Ghid de utilizare",
+            font=("Segoe UI", 12, "bold"),
+            bg=THEME["card_bg"],
+            fg=THEME["text_dark"],
+        ).pack(anchor="w", pady=(0, 10))
 
         tips = (
-            "Navigarea se face folosind butoanele din fiecare ecran.\n"
-            "Lista de cursuri poate fi completata cu date noi.\n"
-            "Intrebarile din test se pot modifica din \"Gestionare Quiz\" \n"
-            "Rezultatul testului grila este afisat la final.\n"
+            "• Navigarea se face folosind butoanele din fiecare ecran.\n"
+            "• Lista de cursuri poate fi completata cu date noi.\n"
+            "• Intrebarile din test se pot modifica din \"Gestionare Quiz\".\n"
+            "• Rezultatul testului grila este afisat la final.\n"
         )
-        tk.Label(self, text=tips, bg=THEME["help_bg"], justify="left").pack(pady=10)
+        tk.Label(
+            content,
+            text=tips,
+            bg=THEME["card_bg"],
+            fg=THEME["text_muted"],
+            justify="left",
+        ).pack(anchor="w")
 
-        tk.Button(self, text="Inapoi la meniu", command=lambda: self.app.show_screen("main_menu")).pack(pady=10)
+        tk.Button(
+            content,
+            text="Inapoi la meniu",
+            command=lambda: self.app.show_screen("main_menu"),
+            bg=THEME["text_dark"],
+            fg=THEME["text_light"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        ).pack(anchor="e", pady=(16, 0))
