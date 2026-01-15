@@ -11,21 +11,21 @@ FISIER_CURSURI = DIRECTOR_STOCARE / "cursuri.json"
 FISIER_CHESTIONAR = DIRECTOR_STOCARE / "chestionar.json"
 
 CURSURI_IMPLICITE = [
-    {"curs": "Programare Python", "profesor": "Conf. Popescu"},
-    {"curs": "Baze de date", "profesor": "Lect. Ionescu"},
-    {"curs": "Retele de calculatoare", "profesor": "Prof. Georgescu"},
+    {"curs": "Algoritmi si structuri de date", "profesor": "Conf. Dumitrescu"},
+    {"curs": "Ingineria programarii", "profesor": "Lect. Marin"},
+    {"curs": "Sisteme de operare", "profesor": "Prof. Stan"},
 ]
 
 INTREBARI_IMPLICITE = [
     {
-        "intrebare": "Care este biblioteca grafica folosita in aceasta aplicatie?",
-        "optiuni": ["Tkinter", "PyQt", "Kivy"],
-        "raspuns": "Tkinter",
+        "intrebare": "Ce tip de fisier folosim pentru persistenta datelor cursurilor?",
+        "optiuni": ["JSON", "CSV", "XML"],
+        "raspuns": "JSON",
     },
     {
-        "intrebare": "Ce widget folosim pentru selectia unei singure optiuni?",
-        "optiuni": ["Listbox", "Radiobutton", "Canvas"],
-        "raspuns": "Radiobutton",
+        "intrebare": "Care este widgetul folosit pentru afisarea unei liste selectabile?",
+        "optiuni": ["Listbox", "Label", "Entry"],
+        "raspuns": "Listbox",
     },
 ]
 

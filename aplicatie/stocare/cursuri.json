@@ -1,14 +1,14 @@
 [
   {
-    "curs": "Programare Python",
-    "profesor": "Conf. Popescu"
+    "curs": "Algoritmi si structuri de date",
+    "profesor": "Conf. Dumitrescu"
   },
   {
-    "curs": "Baze de date",
-    "profesor": "Lect. Ionescu"
+    "curs": "Ingineria programarii",
+    "profesor": "Lect. Marin"
   },
   {
-    "curs": "Retele de calculatoare",
-    "profesor": "Prof. Georgescu"
+    "curs": "Sisteme de operare",
+    "profesor": "Prof. Stan"
   }
 ]
