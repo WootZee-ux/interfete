@@ -1,4 +1,4 @@
-"""Utilitare pentru autentificare si gestionarea parolelor."""
+"""Utilitare pentru autentificare si validarea utilizatorilor din stocare."""
 from __future__ import annotations
 
 import hashlib

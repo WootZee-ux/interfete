@@ -1,4 +1,4 @@
-"""Ecran de gestionare a datelor (cursuri)."""
+"""Ecran pentru administrarea listei de cursuri."""
 from tkinter import messagebox
 import tkinter as tk
 

@@ -1,4 +1,4 @@
-"""Aplicatia principala Tkinter."""
+"""Aplicatia principala Tkinter care gestioneaza navigarea intre ecrane."""
 import tkinter as tk
 
 from aplicatie.constante import TITLU_APLICATIE, TEMA

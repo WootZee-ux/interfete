@@ -1,4 +1,4 @@
-"""Constante pentru aplicatie."""
+"""Constante pentru titlu, student si paleta de culori a interfetei."""
 
 INFO_STUDENT = "Student Exemplu - Grupa 101"
 TITLU_APLICATIE = f"Aplicatie Interfete - {INFO_STUDENT}"

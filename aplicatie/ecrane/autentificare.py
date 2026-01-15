@@ -1,4 +1,4 @@
-"""Ecran de autentificare."""
+"""Ecran pentru autentificarea utilizatorilor in aplicatie."""
 from tkinter import messagebox, simpledialog
 import tkinter as tk
 
