@@ -38,6 +38,9 @@ class EcranMeniuPrincipal(EcranBaza):
                 TEMA["accent_secundar"],
                 lambda: self.aplicatie.afiseaza_ecran("gestionare_chestionar"),
             ),
+            ("ℹ️ Informatii aplicatie", TEMA["accent_principal"], lambda: self.aplicatie.afiseaza_ecran("informatii")),
+            ("👤 Profil utilizator", TEMA["accent_roz"], lambda: self.aplicatie.afiseaza_ecran("profil")),
+            ("📅 Calendar activitati", TEMA["accent_succes"], lambda: self.aplicatie.afiseaza_ecran("calendar")),
             ("🆘 Ajutor si ghid", TEMA["accent_roz"], lambda: self.aplicatie.afiseaza_ecran("ajutor")),
         ]
         for idx, (eticheta, culoare, actiune) in enumerate(butoane):

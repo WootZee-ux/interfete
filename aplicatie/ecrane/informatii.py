@@ -27,7 +27,7 @@ class EcranInformatii(EcranBaza):
         ).pack(anchor="w", pady=(0, 10))
 
         detalii = (
-            "Include module: autentificare, meniu, gestionare cursuri, test grila si sectiune de ajutor.\n\n"
+            "Include module: autentificare, meniu, gestionare cursuri, test grila, profil, calendar si ajutor.\n\n"
             "Informatiile sunt incarcate si salvate local pentru continuitate si acces rapid."
         )
         tk.Label(
