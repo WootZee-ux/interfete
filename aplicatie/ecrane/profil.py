@@ -10,6 +10,7 @@ class EcranProfil(EcranBaza):
 
     def __init__(self, master, aplicatie):
         super().__init__(master, aplicatie, bg=TEMA["fundal_profil"])
+        self.valori = {}
         self._construieste_ui()
 
     def _construieste_ui(self):
@@ -27,13 +28,13 @@ class EcranProfil(EcranBaza):
         detalii = tk.Frame(continut, bg=TEMA["fundal_card"])
         detalii.pack(fill="x")
         campuri = [
-            ("Nume", "Daniel Uta"),
-            ("Grupa", "312"),
-            ("Specializare", "Informatica"),
-            ("Email", "daniel.uta@s.utm.ro"),
-            ("An", "III"),
+            ("Nume", "nume"),
+            ("Grupa", "grupa"),
+            ("Specializare", "specializare"),
+            ("Email", "email"),
+            ("An", "an"),
         ]
-        for eticheta, valoare in campuri:
+        for eticheta, cheie in campuri:
             linie = tk.Frame(detalii, bg=TEMA["fundal_card"])
             linie.pack(fill="x", pady=2)
             tk.Label(
@@ -44,12 +45,14 @@ class EcranProfil(EcranBaza):
                 bg=TEMA["fundal_card"],
                 fg=TEMA["text_pal"],
             ).pack(side="left")
-            tk.Label(
+            valoare_label = tk.Label(
                 linie,
-                text=valoare,
+                text="",
                 bg=TEMA["fundal_card"],
                 fg=TEMA["text_inchis"],
-            ).pack(side="left")
+            )
+            valoare_label.pack(side="left")
+            self.valori[cheie] = valoare_label
 
         preferinte = tk.Frame(continut, bg=TEMA["fundal_card"])
         preferinte.pack(fill="x", pady=(12, 0))
@@ -83,12 +86,23 @@ class EcranProfil(EcranBaza):
         tk.Button(
             actiuni,
             text="Editeaza profil",
+            command=lambda: self.aplicatie.afiseaza_ecran("editeaza_profil"),
             bg=TEMA["accent_secundar"],
             fg=TEMA["text_deschis"],
             relief="flat",
             padx=12,
             pady=6,
         ).pack(side="left")
+        tk.Button(
+            actiuni,
+            text="Adauga utilizator",
+            command=lambda: self.aplicatie.afiseaza_ecran("gestionare_utilizatori"),
+            bg=TEMA["accent_principal"],
+            fg=TEMA["text_inchis"],
+            relief="flat",
+            padx=12,
+            pady=6,
+        ).pack(side="left", padx=(10, 0))
         tk.Button(
             actiuni,
             text="Inapoi la meniu",
@@ -99,3 +113,7 @@ class EcranProfil(EcranBaza):
             padx=12,
             pady=6,
         ).pack(side="right")
+
+    def on_show(self):
+        for cheie, label in self.valori.items():
+            label.config(text=self.aplicatie.profil.get(cheie, ""))
