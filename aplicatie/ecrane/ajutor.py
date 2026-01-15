@@ -1,4 +1,4 @@
-"""Ecran de ajutor."""
+"""Ecran cu informatii de ajutor si ghid pentru utilizator."""
 import tkinter as tk
 
 from aplicatie.constante import TEMA

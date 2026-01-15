@@ -1,4 +1,4 @@
-"""Gestionarea datelor persistente pentru aplicatie."""
+"""Gestionarea fisierelor de date persistente pentru cursuri si chestionar."""
 from __future__ import annotations
 
 import json

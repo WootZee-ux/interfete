@@ -1,4 +1,4 @@
-"""Clase comune pentru ecrane."""
+"""Clasa de baza si utilitare comune pentru ecranele aplicatiei."""
 import tkinter as tk
 
 from aplicatie.constante import TEMA

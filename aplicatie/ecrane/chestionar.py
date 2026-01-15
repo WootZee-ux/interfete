@@ -1,4 +1,4 @@
-"""Ecran de test grila."""
+"""Ecran pentru derularea testului grila si afisarea raspunsurilor."""
 from tkinter import messagebox
 import tkinter as tk
 

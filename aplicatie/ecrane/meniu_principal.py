@@ -1,4 +1,4 @@
-"""Ecran principal cu navigare."""
+"""Ecranul principal care ofera navigare catre modulele aplicatiei."""
 import tkinter as tk
 
 from aplicatie.constante import TEMA
@@ -6,7 +6,7 @@ from aplicatie.ecrane.baza import EcranBaza
 
 
 class EcranMeniuPrincipal(EcranBaza):
-    """Ecran principal cu navigare."""
+    """Ecran principal care ofera navigare catre module."""
 
     def __init__(self, master, aplicatie):
         super().__init__(master, aplicatie, bg=TEMA["fundal_meniu"])

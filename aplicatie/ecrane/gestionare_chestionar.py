@@ -1,4 +1,4 @@
-"""Ecran de gestionare a intrebarilor pentru chestionar."""
+"""Ecran pentru administrarea intrebarilor din chestionar."""
 from tkinter import messagebox
 import tkinter as tk
 
