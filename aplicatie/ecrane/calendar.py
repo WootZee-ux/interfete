@@ -10,6 +10,7 @@ class EcranCalendar(EcranBaza):
 
     def __init__(self, master, aplicatie):
         super().__init__(master, aplicatie, bg=TEMA["fundal_calendar"])
+        self.lista = None
         self._construieste_ui()
 
     def _construieste_ui(self):
@@ -24,41 +25,15 @@ class EcranCalendar(EcranBaza):
             fg=TEMA["text_inchis"],
         ).pack(anchor="w", pady=(0, 10))
 
-        lista = tk.Frame(continut, bg=TEMA["fundal_card"])
-        lista.pack(fill="both", expand=True)
-
-        intrari = [
-            ("Luni", "Curs Inteligenta Artificiala - 08:30"),
-            ("Marti", "Laborator Retele - 11:00"),
-            ("Miercuri", "Proiect Interfete - 13:30"),
-            ("Joi", "Seminar Sisteme de Operare - 15:00"),
-            ("Vineri", "Colocviu Matematica Discreta - 09:30"),
-            ("Sambata", "Consultatii proiect - 10:30"),
-            ("Duminica", "Pregatire examen - 17:00"),
-        ]
-        for zi, activitate in intrari:
-            rand = tk.Frame(lista, bg=TEMA["fundal_card"])
-            rand.pack(fill="x", pady=3)
-            tk.Label(
-                rand,
-                text=zi,
-                width=10,
-                anchor="w",
-                bg=TEMA["fundal_card"],
-                fg=TEMA["text_pal"],
-            ).pack(side="left")
-            tk.Label(
-                rand,
-                text=activitate,
-                bg=TEMA["fundal_card"],
-                fg=TEMA["text_inchis"],
-            ).pack(side="left")
+        self.lista = tk.Frame(continut, bg=TEMA["fundal_card"])
+        self.lista.pack(fill="both", expand=True)
 
         actiuni = tk.Frame(continut, bg=TEMA["fundal_card"])
         actiuni.pack(fill="x", pady=(12, 0))
         tk.Button(
             actiuni,
             text="Adauga activitate",
+            command=lambda: self.aplicatie.afiseaza_ecran("adauga_activitate"),
             bg=TEMA["accent_principal"],
             fg=TEMA["text_inchis"],
             relief="flat",
@@ -75,3 +50,25 @@ class EcranCalendar(EcranBaza):
             padx=12,
             pady=6,
         ).pack(side="right")
+
+    def on_show(self):
+        for widget in self.lista.winfo_children():
+            widget.destroy()
+        for activitate in self.aplicatie.activitati:
+            rand = tk.Frame(self.lista, bg=TEMA["fundal_card"])
+            rand.pack(fill="x", pady=3)
+            tk.Label(
+                rand,
+                text=activitate.get("zi", ""),
+                width=10,
+                anchor="w",
+                bg=TEMA["fundal_card"],
+                fg=TEMA["text_pal"],
+            ).pack(side="left")
+            descriere = f"{activitate.get('activitate', '')} - {activitate.get('ora', '')}".strip(" -")
+            tk.Label(
+                rand,
+                text=descriere,
+                bg=TEMA["fundal_card"],
+                fg=TEMA["text_inchis"],
+            ).pack(side="left")
