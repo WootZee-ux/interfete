@@ -27,4 +27,6 @@ TEMA = {
     "fundal_chestionar": "#0f172a",
     "fundal_informatii": "#0f172a",
     "fundal_ajutor": "#0f172a",
+    "fundal_profil": "#0f172a",
+    "fundal_calendar": "#0f172a",
 }

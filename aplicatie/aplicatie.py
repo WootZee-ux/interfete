@@ -5,10 +5,13 @@ from aplicatie.constante import TITLU_APLICATIE, TEMA
 from aplicatie.date import incarca_chestionar, incarca_cursuri
 from aplicatie.ecrane.ajutor import EcranAjutor
 from aplicatie.ecrane.autentificare import EcranAutentificare
+from aplicatie.ecrane.calendar import EcranCalendar
 from aplicatie.ecrane.chestionar import EcranChestionar
 from aplicatie.ecrane.gestionare_chestionar import EcranGestionareChestionar
 from aplicatie.ecrane.gestionare_cursuri import EcranGestionareCursuri
+from aplicatie.ecrane.informatii import EcranInformatii
 from aplicatie.ecrane.meniu_principal import EcranMeniuPrincipal
+from aplicatie.ecrane.profil import EcranProfil
 
 
 class Aplicatie(tk.Tk):
@@ -43,6 +46,9 @@ class Aplicatie(tk.Tk):
             "cursuri": EcranGestionareCursuri(container, self),
             "chestionar": EcranChestionar(container, self),
             "gestionare_chestionar": EcranGestionareChestionar(container, self),
+            "informatii": EcranInformatii(container, self),
+            "profil": EcranProfil(container, self),
+            "calendar": EcranCalendar(container, self),
             "ajutor": EcranAjutor(container, self),
         }
         for ecran in self.ecrane.values():
