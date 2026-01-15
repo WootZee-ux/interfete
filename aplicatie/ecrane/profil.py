@@ -27,10 +27,13 @@ class EcranProfil(EcranBaza):
         detalii = tk.Frame(continut, bg=TEMA["fundal_card"])
         detalii.pack(fill="x")
         campuri = [
-            ("Nume", "Ana Popescu"),
-            ("Grupa", "101"),
+            ("Nume", "Daniel Uta"),
+            ("Grupa", "312"),
             ("Specializare", "Informatica"),
-            ("Email", "ana.popescu@exemplu.ro"),
+            ("Email", "daniel.uta@s.utm.ro"),
+            ("An", "III"),
+            ("Forma de invatamant", "Buget"),
+            ("Camin", "Gaudeamus"),
         ]
         for eticheta, valoare in campuri:
             linie = tk.Frame(detalii, bg=TEMA["fundal_card"])

@@ -28,11 +28,13 @@ class EcranCalendar(EcranBaza):
         lista.pack(fill="both", expand=True)
 
         intrari = [
-            ("Luni", "Curs Algoritmica - 10:00"),
-            ("Marti", "Laborator BD - 12:00"),
-            ("Miercuri", "Test grila - 14:00"),
-            ("Joi", "Seminar POO - 16:00"),
-            ("Vineri", "Recapitulare - 09:00"),
+            ("Luni", "Curs Inteligenta Artificiala - 08:30"),
+            ("Marti", "Laborator Retele - 11:00"),
+            ("Miercuri", "Proiect Interfete - 13:30"),
+            ("Joi", "Seminar Sisteme de Operare - 15:00"),
+            ("Vineri", "Colocviu Matematica Discreta - 09:30"),
+            ("Sambata", "Consultatii proiect - 10:30"),
+            ("Duminica", "Pregatire examen - 17:00"),
         ]
         for zi, activitate in intrari:
             rand = tk.Frame(lista, bg=TEMA["fundal_card"])
