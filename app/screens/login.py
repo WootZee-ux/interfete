@@ -3,7 +3,7 @@ from tkinter import messagebox, simpledialog
 import tkinter as tk
 
 from app.auth import update_password, verify_credentials
-from app.constants import THEME
+from app.constants import FONTS, THEME
 from app.screens.base import BaseScreen
 
 
@@ -15,44 +15,75 @@ class LoginScreen(BaseScreen):
         self._build_ui()
 
     def _build_ui(self):
-        title = tk.Label(
-            self,
-            text="Autentificare",
-            font=("Helvetica", 18, "bold"),
+        header = tk.Frame(self, bg=THEME["login_bg"], padx=20, pady=15)
+        header.pack(fill="x")
+        tk.Label(
+            header,
+            text="Portal Acces",
+            font=FONTS["title"],
             bg=THEME["login_bg"],
+            fg=THEME["text_dark"],
+        ).pack(anchor="w")
+        tk.Label(
+            header,
+            text="Conecteaza-te pentru a continua in platforma de cursuri.",
+            font=FONTS["small"],
+            bg=THEME["login_bg"],
+            fg=THEME["text_muted"],
+        ).pack(anchor="w", pady=(4, 0))
+
+        panel = tk.Frame(
+            self,
+            bg=THEME["panel_bg"],
+            padx=20,
+            pady=20,
+            highlightbackground=THEME["outline"],
+            highlightthickness=1,
         )
-        title.pack(pady=20)
+        panel.pack(padx=30, pady=25, fill="x")
 
-        form = tk.Frame(self, bg=THEME["login_bg"])
-        form.pack(pady=10)
+        tk.Label(panel, text="Utilizator", font=FONTS["body"], bg=THEME["panel_bg"]).grid(
+            row=0, column=0, sticky="w", pady=5
+        )
+        tk.Label(panel, text="Parola", font=FONTS["body"], bg=THEME["panel_bg"]).grid(
+            row=2, column=0, sticky="w", pady=5
+        )
 
-        tk.Label(form, text="Utilizator:", bg=THEME["login_bg"]).grid(row=0, column=0, sticky="e", padx=5, pady=5)
-        tk.Label(form, text="Parola:", bg=THEME["login_bg"]).grid(row=1, column=0, sticky="e", padx=5, pady=5)
+        self.username_entry = tk.Entry(panel, width=28)
+        self.password_entry = tk.Entry(panel, show="*", width=28)
+        self.username_entry.grid(row=1, column=0, sticky="ew", pady=5)
+        self.password_entry.grid(row=3, column=0, sticky="ew", pady=5)
 
-        self.username_entry = tk.Entry(form)
-        self.password_entry = tk.Entry(form, show="*")
-        self.username_entry.grid(row=0, column=1, padx=5, pady=5)
-        self.password_entry.grid(row=1, column=1, padx=5, pady=5)
-
-        login_btn = tk.Button(self, text="Autentificare", command=self._handle_login, bg="#4caf50", fg="white")
-        login_btn.pack(pady=10)
+        actions = tk.Frame(panel, bg=THEME["panel_bg"])
+        actions.grid(row=4, column=0, pady=(15, 5), sticky="ew")
+        login_btn = tk.Button(
+            actions,
+            text="Intra in cont",
+            command=self._handle_login,
+            bg=THEME["accent"],
+            fg="white",
+            width=16,
+        )
+        login_btn.pack(side="left", padx=(0, 10))
 
         change_password_btn = tk.Button(
-            self,
-            text="Setare parola",
+            actions,
+            text="Schimba parola",
             command=self._handle_set_password,
-            bg="#2196f3",
+            bg=THEME["accent_alt"],
             fg="white",
+            width=16,
         )
-        change_password_btn.pack(pady=5)
+        change_password_btn.pack(side="left")
 
         info = tk.Label(
-            self,
-            text="Introdu datele tale pentru acces.",
-            bg=THEME["login_bg"],
-            fg="#555",
+            panel,
+            text="Sugestie: parola poate fi resetata din butonul dedicat.",
+            bg=THEME["panel_bg"],
+            fg=THEME["text_muted"],
+            font=FONTS["small"],
         )
-        info.pack(pady=5)
+        info.grid(row=5, column=0, sticky="w", pady=(10, 0))
 
     def _handle_login(self):
         username = self.username_entry.get().strip()

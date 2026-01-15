@@ -1,8 +1,8 @@
 """Ecran de gestionare a datelor (cursuri)."""
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 import tkinter as tk
 
-from app.constants import THEME
+from app.constants import FONTS, THEME
 from app.data import save_courses
 from app.screens.base import BaseScreen
 
@@ -15,31 +15,51 @@ class DataManagementScreen(BaseScreen):
         self._build_ui()
 
     def _build_ui(self):
-        title = tk.Label(self, text="Gestionare Cursuri", font=("Helvetica", 18, "bold"), bg=THEME["data_bg"])
-        title.pack(pady=15)
+        header = tk.Frame(self, bg=THEME["data_bg"], padx=20, pady=15)
+        header.pack(fill="x")
+        tk.Label(header, text="Gestionare Cursuri", font=FONTS["title"], bg=THEME["data_bg"]).pack(anchor="w")
+        tk.Label(
+            header,
+            text="Adauga cursuri noi si actualizeaza lista curenta.",
+            font=FONTS["small"],
+            bg=THEME["data_bg"],
+            fg=THEME["text_muted"],
+        ).pack(anchor="w", pady=(4, 0))
 
-        form = tk.Frame(self, bg=THEME["data_bg"])
-        form.pack(pady=5)
+        form = tk.Frame(self, bg=THEME["panel_bg"], padx=15, pady=12, highlightbackground=THEME["outline"])
+        form.pack(padx=25, pady=10, fill="x")
+        form.configure(highlightthickness=1)
 
-        tk.Label(form, text="Nume curs:", bg=THEME["data_bg"]).grid(row=0, column=0, sticky="e", padx=5, pady=5)
-        tk.Label(form, text="Profesor:", bg=THEME["data_bg"]).grid(row=1, column=0, sticky="e", padx=5, pady=5)
+        tk.Label(form, text="Nume curs", bg=THEME["panel_bg"], font=FONTS["body"]).grid(
+            row=0, column=0, sticky="w", pady=5
+        )
+        tk.Label(form, text="Profesor", bg=THEME["panel_bg"], font=FONTS["body"]).grid(
+            row=0, column=1, sticky="w", pady=5
+        )
 
-        self.course_entry = tk.Entry(form)
-        self.teacher_entry = tk.Entry(form)
-        self.course_entry.grid(row=0, column=1, padx=5, pady=5)
-        self.teacher_entry.grid(row=1, column=1, padx=5, pady=5)
+        self.course_entry = tk.Entry(form, width=22)
+        self.teacher_entry = tk.Entry(form, width=22)
+        self.course_entry.grid(row=1, column=0, padx=(0, 10), pady=5, sticky="ew")
+        self.teacher_entry.grid(row=1, column=1, padx=(0, 10), pady=5, sticky="ew")
 
-        add_btn = tk.Button(form, text="Adauga", command=self._add_course, bg="#ff9800", fg="white")
-        add_btn.grid(row=0, column=2, rowspan=2, padx=10)
+        add_btn = tk.Button(form, text="Adauga curs", command=self._add_course, bg=THEME["accent"], fg="white")
+        add_btn.grid(row=1, column=2, padx=5)
+        form.columnconfigure(0, weight=1)
+        form.columnconfigure(1, weight=1)
 
-        list_frame = tk.Frame(self, bg=THEME["data_bg"])
-        list_frame.pack(pady=10)
+        list_frame = tk.Frame(self, bg=THEME["panel_bg"], padx=10, pady=10, highlightbackground=THEME["outline"])
+        list_frame.pack(padx=25, pady=10, fill="both", expand=True)
+        list_frame.configure(highlightthickness=1)
 
-        self.course_list = tk.Listbox(list_frame, width=42, height=7)
-        self.course_list.pack(side="left", padx=(0, 5))
+        self.course_list = ttk.Treeview(list_frame, columns=("course", "teacher"), show="headings", height=7)
+        self.course_list.heading("course", text="Curs")
+        self.course_list.heading("teacher", text="Profesor")
+        self.course_list.column("course", width=200)
+        self.course_list.column("teacher", width=170)
+        self.course_list.pack(side="left", fill="both", expand=True)
 
         scrollbar = tk.Scrollbar(list_frame, command=self.course_list.yview)
-        scrollbar.pack(side="left", fill="y")
+        scrollbar.pack(side="right", fill="y")
         self.course_list.config(yscrollcommand=scrollbar.set)
 
         btns = tk.Frame(self, bg=THEME["data_bg"])
@@ -53,9 +73,10 @@ class DataManagementScreen(BaseScreen):
         self._refresh_list()
 
     def _refresh_list(self):
-        self.course_list.delete(0, tk.END)
+        for item in self.course_list.get_children():
+            self.course_list.delete(item)
         for course in self.app.courses:
-            self.course_list.insert(tk.END, f"{course['course']} - {course['teacher']}")
+            self.course_list.insert("", tk.END, values=(course["course"], course["teacher"]))
 
     def _add_course(self):
         course = self.course_entry.get().strip()
@@ -70,11 +91,11 @@ class DataManagementScreen(BaseScreen):
         self._refresh_list()
 
     def _remove_course(self):
-        selection = self.course_list.curselection()
+        selection = self.course_list.selection()
         if not selection:
             messagebox.showinfo("Stergere", "Nu ai selectat nimic.")
             return
-        index = selection[0]
+        index = self.course_list.index(selection[0])
         del self.app.courses[index]
         save_courses(self.app.courses)
         self._refresh_list()

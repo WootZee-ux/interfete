@@ -1,7 +1,7 @@
 """Ecran de help."""
 import tkinter as tk
 
-from app.constants import THEME
+from app.constants import FONTS, THEME
 from app.screens.base import BaseScreen
 
 
@@ -13,15 +13,40 @@ class HelpScreen(BaseScreen):
         self._build_ui()
 
     def _build_ui(self):
-        title = tk.Label(self, text="Help", font=("Helvetica", 18, "bold"), bg=THEME["help_bg"])
-        title.pack(pady=15)
+        header = tk.Frame(self, bg=THEME["help_bg"], padx=20, pady=15)
+        header.pack(fill="x")
+        tk.Label(header, text="Help & Suport", font=FONTS["title"], bg=THEME["help_bg"]).pack(anchor="w")
+        tk.Label(
+            header,
+            text="Ghid rapid pentru utilizarea aplicatiei.",
+            font=FONTS["small"],
+            bg=THEME["help_bg"],
+            fg=THEME["text_muted"],
+        ).pack(anchor="w", pady=(4, 0))
 
-        tips = (
-            "Navigarea se face folosind butoanele din fiecare ecran.\n"
-            "Lista de cursuri poate fi completata cu date noi.\n"
-            "Intrebarile din test se pot modifica din \"Gestionare Quiz\" \n"
-            "Rezultatul testului grila este afisat la final.\n"
+        panel = tk.Frame(self, bg=THEME["panel_bg"], padx=16, pady=14, highlightbackground=THEME["outline"])
+        panel.pack(padx=25, pady=15, fill="both", expand=True)
+        panel.configure(highlightthickness=1)
+
+        tips = [
+            "Navigheaza intre ecrane folosind butoanele principale.",
+            "In modulul de cursuri poti adauga sau sterge intrari.",
+            "Intrebarile pentru test se editeaza din Gestionare Quiz.",
+            "Scorul se actualizeaza automat dupa fiecare raspuns.",
+        ]
+        tk.Label(panel, text="Recomandari:", bg=THEME["panel_bg"], font=FONTS["subtitle"]).pack(anchor="w")
+        for tip in tips:
+            tk.Label(panel, text=f"• {tip}", bg=THEME["panel_bg"], anchor="w", font=FONTS["body"]).pack(
+                anchor="w", pady=2
+            )
+
+        contact = tk.Label(
+            panel,
+            text="Suport: suport@campus.local | Program 09:00 - 17:00",
+            bg=THEME["panel_bg"],
+            fg=THEME["text_muted"],
+            font=FONTS["small"],
         )
-        tk.Label(self, text=tips, bg=THEME["help_bg"], justify="left").pack(pady=10)
+        contact.pack(anchor="w", pady=(12, 0))
 
         tk.Button(self, text="Inapoi la meniu", command=lambda: self.app.show_screen("main_menu")).pack(pady=10)
