@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Proiect Interfete</string>
+    <string name="student_title">Student Nume - Grupa 000</string>
+    <string name="login_title">Autentificare</string>
+    <string name="main_menu_title">Meniu principal</string>
+    <string name="data_management_title">Gestionare date</string>
+    <string name="quiz_title">Test grilă</string>
+    <string name="info_title">Informații</string>
+    <string name="help_title">Ajutor</string>
+</resources>
