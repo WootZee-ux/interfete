@@ -15,6 +15,14 @@
             android:layout_height="wrap_content"
             android:background="@color/purple_500"
             android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/screen_banner_desc"
+        android:scaleType="centerCrop"
+        android:src="@drawable/screen_banner" />
+
 
         <TextView
             android:layout_width="match_parent"

@@ -7,4 +7,5 @@
     <string name="quiz_title">Test grilă</string>
     <string name="info_title">Informații</string>
     <string name="help_title">Ajutor</string>
+    <string name="screen_banner_desc">Ilustrație decorativă pentru ecran</string>
 </resources>
