@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+
+# Android/Gradle generated files
+.gradle/
+**/.gradle/
+**/build/
+local.properties
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Site images folder: keep placeholder, track real assets
+site/assets/images/*
+!site/assets/images/.gitkeep
