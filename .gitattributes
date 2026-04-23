@@ -1,0 +1,8 @@
+# Keep binary assets treated as binary in git diffs/merges
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
